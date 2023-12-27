@@ -15,7 +15,8 @@ Special thanks to related projects:
 ## Switch Branches
 
 You can choose to build from
-[OpenWrt official source](https://github.com/openwrt/openwrt),
+[official OpenWrt](https://github.com/openwrt/openwrt),
+[ImmortalWrt](https://github.com/immortalwrt/immortalwrt),
 [Lean's source](https://github.com/coolsnowwolf/lede),
 or any other repository and branch/tag.
 
