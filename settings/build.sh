@@ -9,13 +9,21 @@ conf="../settings/build.conf"
 mkdir package/external
 cd package/external || return 1
 
-### Add packages here
+# Argon Theme
+git clone https://github.com/jerrykuku/luci-theme-argon.git
+
+# Argon Theme Config
+git clone https://github.com/jerrykuku/luci-app-argon-config.git
 
 ### Add config
 cd "$workdir" || return 1
 
 cat >> "$conf" <<EOF
 
-### Add config here
+# Argon Theme
+CONFIG_PACKAGE_luci-theme-argon=y
+
+# Argon Theme Config
+CONFIG_PACKAGE_luci-app-argon-config=y
 
 EOF
