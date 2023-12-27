@@ -32,8 +32,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Recommended package prerequisites
-      # https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem#debianubuntu
+        # Recommended package prerequisites
+        # https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem#debianubuntu
       - name: Initialization
         run: |
           sudo apt-get update
@@ -46,12 +46,19 @@ jobs:
       - name: Load settings
         run: cp -r ./settings ../settings
 
-      # Set the upstream repo and a branch or tag
-      - name: Checkout OpenWrt source code
+        # Set the upstream repo and a branch or tag
+      - name: OpenWrt source code
         uses: actions/checkout@v4
         with:
           repository: 'openwrt/openwrt'
           ref: 'v23.05.2'
+
+      - name: Pre-build scripts
+        run: |
+          bash ../settings/build.sh
+          bash ../settings/custom.sh 
+          cat ../settings/custom.conf >> ../settings/build.conf
+          echo "config has been updated:" && cat ../settings/build.conf
 
       - name: Update feeds
         run: |
@@ -113,8 +120,6 @@ jobs:
           name: OpenWrt firmware
           path: ./bin/targets/
 
-      # Note: set default permissions to read and write
-      #       Settings - Actions - Workflow permissions
       - name: Upload release asset
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
