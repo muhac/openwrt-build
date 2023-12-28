@@ -1,9 +1,7 @@
 #!/bin/bash
 
-pwd && ls -al
-
 workdir=$(pwd)
-conf='../settings/build.conf'
+confdir="$workdir/../settings"
 
 ### Add packages
 mkdir package/external
@@ -16,9 +14,7 @@ git clone https://github.com/jerrykuku/luci-theme-argon.git
 git clone https://github.com/jerrykuku/luci-app-argon-config.git
 
 ### Add config
-cd "$workdir" || return 1
-
-cat >> "$conf" <<EOF
+cat >> "$confdir/basic.conf" <<EOF
 
 # Argon Theme
 CONFIG_PACKAGE_luci-theme-argon=y
@@ -27,3 +23,9 @@ CONFIG_PACKAGE_luci-theme-argon=y
 CONFIG_PACKAGE_luci-app-argon-config=y
 
 EOF
+
+### Merge config
+cd "$confdir" || return 1
+cat basic.conf >> system.conf
+
+cd "$workdir" || return 1

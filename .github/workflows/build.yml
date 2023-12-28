@@ -29,7 +29,7 @@ jobs:
 
     steps:
 
-      - name: Checkout
+      - name: Checkout ${{ github.ref }}
         uses: actions/checkout@v4
 
       - name: Free disk space
@@ -60,17 +60,14 @@ jobs:
           repository: 'openwrt/openwrt'
           ref: 'v23.05.2'
 
-      - name: Pre-build scripts
-        run: |
-          bash ../settings/build.sh
-          bash ../settings/custom.sh 
-          cat ../settings/custom.conf >> ../settings/build.conf
+      - name: Configure basic packages
+        run: bash ../settings/basic.sh
 
-      - name: System config
-        run: cat package/base-files/files/bin/config_generate
+      - name: Configure extra packages
+        run: bash ../settings/extra.sh
 
-      - name: Compile config
-        run: cat ../settings/build.conf
+      - name: Configuration settings
+        run: cat ../settings/system.conf
 
       - name: Update feeds
         run: |
@@ -80,17 +77,20 @@ jobs:
       - name: Generate config
         run: |
           rm -f ./.config*
-          cp ../settings/build.conf ./.config
+          cp ../settings/system.conf ./.config
           make defconfig
 
-      - name: Generated config
+      - name: Overwrite config
+        run: bash ../settings/system.sh
+
+      - name: Check build config
         run: cat ./.config
 
+      - name: Check system config
+        run: cat ./package/base-files/files/bin/config_generate
+
       - name: Make download
-        run: |
-          make download -j8 || make download -j1 V=s
-          rm -rf $(find ./dl/ -size -1024c)
-          df -h
+        run: make download -j$(nproc) || make download -j1 V=s
 
       - name: Compile firmware
         run: make -j$(nproc) || make -j1 V=s
@@ -106,7 +106,7 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          echo "now=$(date '+%Y%m%d%H%M%S')" >> $GITHUB_ENV
+          echo "now=$(date '+%Y%m%d_%H%M%S')" >> $GITHUB_ENV
           mkdir -p ./artifact/firmware
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
@@ -118,19 +118,19 @@ jobs:
       - name: Deliver buildinfo
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt buildinfo ${{ env.now }}
+          name: OpenWrt_buildinfo_${{ github.ref_name }}_${{ env.now }}
           path: ./artifact/buildinfo/
 
       - name: Deliver package
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt package ${{ env.now }}
+          name: OpenWrt_package_${{ github.ref_name }}_${{ env.now }}
           path: ./artifact/package/
 
       - name: Deliver firmware
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt firmware ${{ env.now }}
+          name: OpenWrt_firmware_${{ github.ref_name }}_${{ env.now }}
           path: ./artifact/firmware/
 
       - name: Upload release asset
