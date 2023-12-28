@@ -32,8 +32,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-        # Recommended package prerequisites
-        # https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem#debianubuntu
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+
+      - name: Check free space
+        run: df -Th
+
+      # Recommended package prerequisites
+      # https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem#debianubuntu
       - name: Initialization
         run: |
           sudo apt-get update
@@ -41,12 +49,11 @@ jobs:
               gcc-multilib g++-multilib gettext git libncurses-dev libssl-dev \
               python3-distutils rsync unzip zlib1g-dev file wget qemu-utils
           sudo apt-get clean
-          df -Th
 
       - name: Load settings
         run: cp -r ./settings ../settings
 
-        # Set the upstream repo and a branch or tag
+      # Set the upstream repo and a branch or tag
       - name: OpenWrt source code
         uses: actions/checkout@v4
         with:
@@ -89,18 +96,17 @@ jobs:
         run: make -j$(nproc) || make -j1 V=s
 
       - name: Build results
-        run: |
-          ls -al ./bin/targets/
-          echo "======================="
-          echo "Space usage:"
-          echo "======================="
-          df -h
-          echo "======================="
-          du -h ./ --max-depth=1
-          du -h /mnt/openwrt/ --max-depth=1 || true
+        run: tree -a ./bin/targets/
+
+      - name: Space usage
+        run: du -h ./ --max-depth=1
+
+      - name: Disk space remaining
+        run: df -h
 
       - name: Prepare artifact
         run: |
+          echo "now=$(date '+%Y%m%d%H%M%S')" >> $GITHUB_ENV
           mkdir -p ./artifact/firmware
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
@@ -112,20 +118,20 @@ jobs:
       - name: Deliver buildinfo
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt buildinfo
+          name: OpenWrt buildinfo ${{ env.now }}
           path: ./artifact/buildinfo/
 
       - name: Deliver package
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt package
+          name: OpenWrt package ${{ env.now }}
           path: ./artifact/package/
 
       - name: Deliver firmware
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt firmware
-          path: ./bin/targets/
+          name: OpenWrt firmware ${{ env.now }}
+          path: ./artifact/firmware/
 
       - name: Upload release asset
         if: github.event_name == 'release'

@@ -21,7 +21,7 @@ You can choose to build from
 or any other repository and branch/tag.
 
 Specify your choice in `build-openwrt.yml` file
-[here](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L53-L54).
+[here](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L60-L61).
 
 ### I18N
 - [中文](README_zhCN.md)
