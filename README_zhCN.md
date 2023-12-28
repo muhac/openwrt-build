@@ -20,7 +20,7 @@
 ##### 更改 OpenWrt 源
 
 在 `build-openwrt.yml` 文件中, 将
-[此处](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L53)
+[此处](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L53-L54)
 代码库和分支更改为你自己的源.
 
 ##### 配置固件
