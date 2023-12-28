@@ -3,7 +3,7 @@
 pwd && ls -al
 
 workdir=$(pwd)
-conf="../settings/build.conf"
+conf='../settings/build.conf'
 
 ### Add packages
 mkdir package/external

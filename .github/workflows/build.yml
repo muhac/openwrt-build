@@ -58,7 +58,12 @@ jobs:
           bash ../settings/build.sh
           bash ../settings/custom.sh 
           cat ../settings/custom.conf >> ../settings/build.conf
-          echo "config has been updated:" && cat ../settings/build.conf
+
+      - name: System config
+        run: cat package/base-files/files/bin/config_generate
+
+      - name: Compile config
+        run: cat ../settings/build.conf
 
       - name: Update feeds
         run: |
@@ -70,7 +75,9 @@ jobs:
           rm -f ./.config*
           cp ../settings/build.conf ./.config
           make defconfig
-          cat ./.config
+
+      - name: Generated config
+        run: cat ./.config
 
       - name: Make download
         run: |
