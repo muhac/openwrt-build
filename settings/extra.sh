@@ -7,12 +7,14 @@ confdir="$workdir/../settings"
 mkdir package/external
 cd package/external || return 1
 
-# Add packages here
+# Netdata
+git clone https://github.com/muink/luci-app-netdata.git --branch nossl_version
 
 ### Add config
 cat >> "$confdir/extra.conf" <<EOF
 
-# Add config here
+# Netdata
+CONFIG_PACKAGE_luci-app-netdata=y
 
 EOF
 
