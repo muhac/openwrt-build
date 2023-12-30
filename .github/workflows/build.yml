@@ -57,8 +57,8 @@ jobs:
       - name: OpenWrt source code
         uses: actions/checkout@v4
         with:
-          repository: 'openwrt/openwrt'
-          ref: 'v23.05.2'
+          repository: 'coolsnowwolf/lede'
+          ref: '20220401' # Actual R23.4.1
 
       - name: Configure basic packages
         run: bash ../settings/basic.sh

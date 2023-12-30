@@ -8,10 +8,10 @@ mkdir package/external
 cd package/external || return 1
 
 # Argon Theme
-git clone https://github.com/jerrykuku/luci-theme-argon.git
+git clone https://github.com/jerrykuku/luci-theme-argon.git --branch 18.06
 
 # Argon Theme Config
-git clone https://github.com/jerrykuku/luci-app-argon-config.git
+git clone https://github.com/jerrykuku/luci-app-argon-config.git --branch 18.06
 
 ### Add config
 cat >> "$confdir/basic.conf" <<EOF
