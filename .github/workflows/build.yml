@@ -57,8 +57,8 @@ jobs:
       - name: OpenWrt source code
         uses: actions/checkout@v4
         with:
-          repository: 'openwrt/openwrt'
-          ref: 'v23.05.2'
+          repository: 'immortalwrt/immortalwrt'
+          ref: 'v23.05.1'
 
       - name: Configure basic packages
         run: bash ../settings/basic.sh
