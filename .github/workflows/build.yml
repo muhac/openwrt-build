@@ -14,8 +14,8 @@ on:
   push:
     branches:
       - '**'
-  # schedule:
-  #   - cron: 0 0 * * SAT
+  schedule:
+      - cron: 0 0 * * SAT
   release:
     types:
       - published
