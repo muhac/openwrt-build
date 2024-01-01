@@ -1,3 +1,10 @@
+### Hostname
+name='OpenWrt'
+
+# Modify the default timezone (/etc/config/system)
+# https://github.com/openwrt/openwrt/blob/v23.05.2/package/base-files/files/bin/config_generate#L314
+sed -i "s#hostname='OpenWrt'#hostname='$name'#g" package/base-files/files/bin/config_generate
+
 ### Timezone
 tz='Etc/GMT'
 
