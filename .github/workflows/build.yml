@@ -14,8 +14,8 @@ on:
   push:
     branches:
       - '**'
-  # schedule:
-  #   - cron: 0 0 * * SAT
+  schedule:
+      - cron: 0 0 * * SAT
   release:
     types:
       - published
@@ -57,7 +57,7 @@ jobs:
       - name: OpenWrt source code
         uses: actions/checkout@v4
         with:
-          repository: 'openwrt/openwrt'
+          repository: 'immortalwrt/immortalwrt'
           ref: 'v23.05.2'
 
       - name: Configure basic packages
