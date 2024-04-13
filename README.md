@@ -6,7 +6,7 @@ Special thanks to related projects:
 
 ## Usage
 
-1. `Fork` this repository.
+1. `Fork` this repository. Switch to the `openwrt` branch for a clean build.
 2. Customize your firmware in `settings/.config` file. (optional)
 3. `Commit` changes and `push` to GitHub to trigger the workflow.
 4. Make a cup of coffee, and wait for the build to finish (about 1 hour).

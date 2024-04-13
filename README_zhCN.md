@@ -16,6 +16,11 @@
 
 #### 2. `Fork` 此代码库.
 
+`main` 分支是个人定制的固件, 如果想使用纯净版或其他源需要切换到对应的分支:
+- [OpenWrt 官方源](https://github.com/muhac/openwrt-action/tree/openwrt)
+- [ImmortalWrt](https://github.com/muhac/openwrt-action/tree/immortal)
+- [Lean Lede](https://github.com/muhac/openwrt-action/tree/leanlede)
+
 #### 3. 定制固件:
 
 ##### 更改 OpenWrt 源
@@ -40,7 +45,6 @@
 #### 4. 大功告成.
 
 > ### 如何下载到编译完成的固件?
-
-集成编译环境会自动开始编译. 在代码库首页, 点击页面上方的 `Actions` 按钮就可以查看进度.
-
-如果相应的集成活动顺利完成 (显示为绿色), 点击页面右上方的 `Artifacts` 即可看到你的固件 (通常是一个压缩包). 点击即可开始下载.
+>
+> 集成编译环境会自动开始编译. 在代码库首页, 点击页面上方的 `Actions` 按钮就可以查看进度.
+>  如果相应的集成活动顺利完成 (显示为绿色), 点击页面右上方的 `Artifacts` 即可看到你的固件 (通常是一个压缩包). 点击即可开始下载.
