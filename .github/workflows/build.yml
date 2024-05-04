@@ -15,7 +15,7 @@ on:
     branches:
       - '**'
   schedule:
-      - cron: 0 0 * * SAT
+      - cron: 0 0 * * FRI
   release:
     types:
       - published
@@ -25,7 +25,6 @@ jobs:
 
     name: Build OpenWrt Firmware
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
 
