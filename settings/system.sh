@@ -6,7 +6,7 @@ name='MineWrt'
 sed -i "s#hostname='ImmortalWrt'#hostname='$name'#g" package/base-files/files/bin/config_generate
 
 ### Timezone
-tz='Asia/Singapore'
+tz='America/Toronto'
 
 # Use zonename instead of timezone, see doc:
 # https://openwrt.org/docs/guide-user/base-system/system_configuration
@@ -17,7 +17,7 @@ tz='Asia/Singapore'
 sed -i "s#timezone='UTC'#zonename='$tz'#g" package/base-files/files/bin/config_generate
 
 ### LAN IP
-addr='10.10.1.2'
+addr='10.10.1.1'
 mask='255.255.0.0'
 
 # Modify the default LAN IP address and subnet mask  (/etc/config/network)
