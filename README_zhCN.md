@@ -10,7 +10,7 @@
 感谢 [P3TERX](https://github.com/P3TERX/Actions-OpenWrt)
 及 [KFERMercer](https://github.com/KFERMercer/OpenWrt-CI) 珠玉在前.
 
-## 使用教程:
+## 使用教程
 
 #### 1. 注册 GitHub 账号并开启 GitHub Actions.
 
@@ -26,7 +26,7 @@
 ##### 更改 OpenWrt 源
 
 在 `build-openwrt.yml` 文件中, 将
-[此处](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L60-L61)
+[此处](https://github.com/muhac/openwrt-action/blob/main/.github/workflows/build.yml#L59-L60)
 代码库和分支更改为你自己的源.
 
 我已经测试过从 [ImmortalWrt](https://github.com/muhac/openwrt-action/tree/immortal)
